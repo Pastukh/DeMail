@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DeMail:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="DeMail.war">
+      <element id="artifact" artifact-name="DeMail:war exploded" />
+    </root>
+  </artifact>
+</component>

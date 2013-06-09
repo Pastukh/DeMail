@@ -43,7 +43,10 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
-  <component name="IdProvider" IDEtalkID="53CDA9EAE5B5878C78421EED44841F45" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="IdProvider" IDEtalkID="9947425F79E258D8D801BDBDF116D72C" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -161,22 +164,6 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
 
