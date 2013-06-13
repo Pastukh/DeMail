@@ -1,5 +1,9 @@
 package edu.tsystems.demail;
 
+import edu.tsystems.demail.DTO.LoginDTO;
+import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.model.UserDAO;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -14,26 +18,26 @@ class Presentation
 {
     private JButton button1;
     private JPanel panel1;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JLabel ConStatus;
     private JLabel label1;
+    public JFrame frame;
 
     public Presentation() {
-        button1.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                super.mouseMoved(e);
-                   //System.out.print("goood");//To change body of overridden methods use File | Settings | File Templates.
-                label1.setText("derr");
-            }
-        });
-        button1.addComponentListener(new ComponentAdapter() {
-        });
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
-                label1.setText("fdjkh");
+                UserService userService = new UserService();
+                LoginDTO loginDTO = new LoginDTO();
+                UserDTO userDTO = new UserDTO();
+                loginDTO.setLogin(textField1.getText());
+                loginDTO.setPassword(textField2.getText());
+                userDTO = userService.login(loginDTO);
+                if (userDTO!=null) ConStatus.setText(userDTO.getFirstname() + userDTO.getLastname() + " is connected"); //JOptionPane.showMessageDialog(frame,userDTO.getLastname());
             }
         });
+
     }
 
 
@@ -42,8 +46,7 @@ class Presentation
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
-        JFrame frame = new JFrame("DeMail");
+        frame = new JFrame("DeMail");
         frame.setContentPane(new Presentation().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

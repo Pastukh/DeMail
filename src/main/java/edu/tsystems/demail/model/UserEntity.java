@@ -13,60 +13,78 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="users")
-@NamedQuery(name = "UserEntity.getAll", query = "SELECT u FROM UserEntity u")
+@NamedQueries({
+    @NamedQuery(name = "UserEntity.getAll", query = "SELECT u FROM UserEntity u"),
+    @NamedQuery(name = "UserEntity.findByLogin",
+        query = "SELECT u FROM UserEntity u WHERE u.login = :login"),
+    @NamedQuery(name = "UserEntity.findByLoginAndPassword",
+        query = "SELECT u FROM UserEntity u WHERE u.login = :login AND u.pass = :password")
+})
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column (name = "first_name", length = 31)
+    @Column (name = "login", length = 30)
+    @NotNull
+    private String login;
+    @Column (name = "first_name", length = 30)
     @NotNull
     private String first_name;
     @Column (name = "last_name", length = 30)
-    private String lname;
-    @Column (name = "mid_name", length = 30)
-    private String mname;
+    @NotNull
+    private String last_name;
     @Column (name = "phone", length = 30)
+    @NotNull
     private String phone;
     @Column (name = "pass", length = 30)
+    @NotNull
     private String pass;
-
-    public UserEntity(int id) {
-        this.id = id;
-    }
-
-    public UserEntity(String first_name, String lname, String mname, String phone, String pass) {
-        this.first_name = first_name;
-        this.lname = lname;
-        this.mname = mname;
-        this.phone = phone;
-        this.pass = pass;
-    }
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private MBoxEntity mailBox;
 
     public UserEntity() {
+    }
+
+    public UserEntity(String login, String first_name, String last_name, String phone, String pass, MBoxEntity mailBox) {
+        this.login = login;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone = phone;
+        this.pass = pass;
+        this.mailBox = mailBox;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirst_name() {
         return first_name;
     }
 
-    public void setFirst_name(String name) {
-        this.first_name = name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public String getMname() {
-        return mname;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getPhone() {
@@ -85,23 +103,25 @@ public class UserEntity {
         this.pass = pass;
     }
 
+    public MBoxEntity getMailBox() {
+        return mailBox;
+    }
+
+    public void setMailBox(MBoxEntity mailBox) {
+        this.mailBox = mailBox;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
-                "name='" + first_name + '\'' +
-                ", lname='" + lname + '\'' +
-                ", mname='" + mname + '\'' +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", pass='" + pass + '\'' +
+                ", mailBox=" + mailBox +
                 '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
 

@@ -1,7 +1,11 @@
 package edu.tsystems.demail;
 
+import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.model.UserDAO;
 import edu.tsystems.demail.model.UserEntity;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import java.util.List;
 
 /**
@@ -12,16 +16,20 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class App {
-
     public static void main (String[] args){
-        //new Presentation().start();
+        new Presentation().start();
+//        List<UserEntity> users;
+//
+//        UserDAO dao = new UserDAO();
+//        users = dao.getUserByLogin("user");
+//        for (UserEntity u: users){
+//            System.out.println(u);
+//        }
 
-        UserService user = new UserService();
-       // System.out.print(user.getUser());
-        List<UserEntity> users = user.getAll();
-        for (UserEntity u: users){
-            System.out.println(u);
-        }
+//        users = dao.getAll();
+//        for (UserEntity u: users){
+//            System.out.println(u);
+//        }
 
     }
 }

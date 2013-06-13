@@ -1,2 +1,2 @@
-INSERT INTO test.users (id, first_name, last_name, mid_name, phone, pass) VALUES (1, 'Ivan', 'Petrov', 'Nik', '9115670123', '12345');
-INSERT INTO test.users (id, first_name, last_name, mid_name, phone, pass) VALUES (2, 'Petr', 'Sidorov', 'Ivanovich', '9132215643', '1212');
+INSERT INTO test.users (id, login, first_name, last_name, phone, pass) VALUES (1, 'root', 'Ivan', 'Petrov', '9115670123', '12345');
+INSERT INTO test.users (id, login, first_name, last_name, phone, pass) VALUES (2, 'user', 'Petr', 'Sidorov', '9132215643', '1212');
