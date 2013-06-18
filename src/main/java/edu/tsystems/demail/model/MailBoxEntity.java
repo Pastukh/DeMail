@@ -34,14 +34,6 @@ public class MailBoxEntity {
     public MailBoxEntity() {
     }
 
-    public MailBoxEntity(int id, int userId, String mailBox, Date dateCreate, UserEntity user) {
-        this.id = id;
-        this.userId = userId;
-        this.mailBox = mailBox;
-        this.dateCreate = dateCreate;
-        this.user = user;
-    }
-
     public int getId() {
         return id;
     }
@@ -74,11 +66,14 @@ public class MailBoxEntity {
         this.dateCreate = dateCreate;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
+    @Override
+    public String toString() {
+        return "MailBoxEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", mailBox='" + mailBox + '\'' +
+                ", dateCreate=" + dateCreate +
+                ", folders=" + folders +
+                '}';
     }
 }

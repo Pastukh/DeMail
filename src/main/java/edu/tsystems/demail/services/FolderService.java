@@ -17,7 +17,7 @@ import java.util.List;
  * Time: 11:41
  */
 public class FolderService {
-    private FolderDAO folderDAO;
+    private FolderDAO folderDAO = new FolderDAO();
     private UserDAO userDAO;
     //private MailService mailService;
 
@@ -38,13 +38,14 @@ public class FolderService {
     }
 
 
-    public void createDefaultFolderForMailBoxId(MailBoxDTO mailBox) {
+    public void createDefaultFolderForMailBoxId(MailBoxDTO mailBoxDTO) {
         // prepare new folders
         MailBoxEntity mailBoxEntity = new MailBoxEntity();
-        mailBoxEntity.setMailBox(mailBox.getMailbox());
-        mailBoxEntity.setId(mailBox.getId());
-        mailBoxEntity.setUserId(mailBox.getUserId());
-        mailBoxEntity.setDateCreate(mailBox.getDateCreated());
+        mailBoxEntity.setMailBox(mailBoxDTO.getMailbox());
+        mailBoxEntity.setId(mailBoxDTO.getId());
+        mailBoxEntity.setUserId(mailBoxDTO.getUserId());
+        mailBoxEntity.setDateCreate(mailBoxDTO.getDateCreated());
+        System.out.println(mailBoxEntity);
         folderDAO.createDefaultFoldersForMailBox(mailBoxEntity);
     }
 

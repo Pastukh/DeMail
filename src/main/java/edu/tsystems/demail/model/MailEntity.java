@@ -12,6 +12,7 @@ import java.util.Date;
 @Table(name = "mails")
 public class MailEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "mail_from", length = 30)
     private String mailFrom;

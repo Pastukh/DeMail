@@ -1,7 +1,6 @@
 package edu.tsystems.demail.DAO;
 
 import edu.tsystems.demail.model.MailBoxEntity;
-import edu.tsystems.demail.model.UserEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -13,9 +12,11 @@ import javax.persistence.Persistence;
  */
 public class MailBoxDAO {
     private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
-    public void create (MailBoxEntity mailBoxEntity){
+    public int create (MailBoxEntity mailBoxEntity){
+        int mailBoxId = 0;
         em.getTransaction().begin();
-        em.merge(mailBoxEntity);
+        mailBoxId = em.merge(mailBoxEntity).getId();
         em.getTransaction().commit();
+        return mailBoxId;
     }
 }

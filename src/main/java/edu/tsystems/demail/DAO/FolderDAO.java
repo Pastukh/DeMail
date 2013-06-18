@@ -5,7 +5,6 @@ import edu.tsystems.demail.model.MailBoxEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -25,23 +24,23 @@ public class FolderDAO {
     }
 
 
-    public void createDefaultFoldersForMailBox(MailBoxEntity mailBox) {
-        System.out.println("DAO LEVEL: " + mailBox);
-        FolderEntity incoming = new FolderEntity();
-        incoming .setMailBox(mailBox);
-        incoming.setName("Inbox");
+    public void createDefaultFoldersForMailBox(MailBoxEntity mailBoxEntity) {
+        System.out.println("DAO LEVEL: " + mailBoxEntity);
+        FolderEntity inbox = new FolderEntity();
+        inbox.setMailBox(mailBoxEntity);
+        inbox.setName("Inbox");
 
-        FolderEntity sent = new FolderEntity();
-        sent.setMailBox(mailBox);
-        sent.setName("Outbox");
+        FolderEntity outbox = new FolderEntity();
+        outbox.setMailBox(mailBoxEntity);
+        outbox.setName("Outbox");
 
         FolderEntity trash = new FolderEntity();
-        trash.setMailBox(mailBox);
+        trash.setMailBox(mailBoxEntity);
         trash.setName("Trash");
 
-        em.persist(incoming);
-        em.persist(sent);
-        em.persist(trash);
+        create(inbox);
+        create(outbox);
+        create(trash);
     }
 
 

@@ -4,6 +4,7 @@ import edu.tsystems.demail.DTO.MailBoxDTO;
 import edu.tsystems.demail.DTO.UserDTO;
 import edu.tsystems.demail.Validator;
 import edu.tsystems.demail.model.UserEntity;
+import edu.tsystems.demail.services.FolderService;
 import edu.tsystems.demail.services.MailBoxService;
 import edu.tsystems.demail.services.UserService;
 
@@ -16,11 +17,9 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
- * Date: 14.06.13
+ * Author: Ivan Pastukh
+ * Date: 11.06.13
  * Time: 16:37
- * To change this template use File | Settings | File Templates.
  */
 public class RegForm {
     private JButton submitButton;
@@ -34,6 +33,7 @@ public class RegForm {
     private JTextField mailBoxTextField;
     private UserService userService = new UserService();
     private Validator validator = new Validator();
+    private MailBoxDTO mailBoxDTO;
 
     public RegForm() {
         submitButton.addActionListener(new ActionListener() {
@@ -71,14 +71,28 @@ public class RegForm {
             if (userEntity != null) System.out.println("ok");
 //                JOptionPane.showMessageDialog(panel1, "Ok");
             //create mail box for user
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(userEntity.getId());
-            userDTO.setLogin(userEntity.getLogin());
-            MailBoxService mailBoxService = new MailBoxService();
-            MailBoxDTO mailBoxDTO = mailBoxService.createMailBox(userDTO);
+            mailBoxDTO = createMailBoxForUser(userEntity);
+            createDefaultFolder();
 
         }
 
+    }
+
+    private MailBoxDTO createMailBoxForUser(UserEntity userEntity) {
+        System.out.println("create mail box for user " + userEntity.getLogin());
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(userEntity.getId());
+        userDTO.setLogin(userEntity.getLogin());
+        MailBoxService mailBoxService = new MailBoxService();
+        mailBoxDTO = mailBoxService.createMailBox(userDTO);
+        return mailBoxDTO;
+
+    }
+
+    private void createDefaultFolder() {
+        System.out.println("create defaul folder for mail box " + mailBoxDTO.getMailbox());
+        FolderService folderService = new FolderService();
+        folderService.createDefaultFolderForMailBoxId(mailBoxDTO);
     }
 
     public void createUI() {
