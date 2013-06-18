@@ -6,8 +6,12 @@
 
     <groupId>edu.tsystems</groupId>
     <artifactId>demail</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>Server</module>
+        <module>Client</module>
+    </modules>
     <name>DeMail</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
