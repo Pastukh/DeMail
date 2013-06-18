@@ -29,17 +29,26 @@ public class FolderDAO {
         FolderEntity inbox = new FolderEntity();
         inbox.setMailBox(mailBoxEntity);
         inbox.setName("Inbox");
+        inbox.setSystem(true);
 
         FolderEntity outbox = new FolderEntity();
         outbox.setMailBox(mailBoxEntity);
         outbox.setName("Outbox");
+        outbox.setSystem(true);
+
+        FolderEntity sent = new FolderEntity();
+        sent.setMailBox(mailBoxEntity);
+        sent.setName("Sent");
+        sent.setSystem(true);
 
         FolderEntity trash = new FolderEntity();
         trash.setMailBox(mailBoxEntity);
         trash.setName("Trash");
+        trash.setSystem(true);
 
         create(inbox);
         create(outbox);
+        create(sent);
         create(trash);
     }
 

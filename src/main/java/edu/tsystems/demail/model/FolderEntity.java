@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "folders")
 @NamedQueries({
+    @NamedQuery(name = "FolderEntity.getFolderByName",
+                query = "SELECT f FROM FolderEntity f WHERE f.mailBox = :mailBox AND f.name = :name"),
     @NamedQuery(name = "FolderEntity.getFoldersByUserId",
             query = "SELECT f FROM FolderEntity f WHERE f.mailBox.userId = :userId"),
     @NamedQuery(name = "FolderEntity.getFolderByNameAndUserId",
@@ -21,9 +23,12 @@ public class FolderEntity {
     private int id;
     @Column(name = "name",  length = 30)
     private String name;
+    @Column(name = "is_system")
+    private Boolean system;
     @ManyToOne
     @JoinColumn(name = "mailBox")
     private MailBoxEntity mailBox;
+
 
     public int getId() {
         return id;
@@ -39,6 +44,14 @@ public class FolderEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean isSystem() {
+        return system;
+    }
+
+    public void setSystem(Boolean system) {
+        this.system = system;
     }
 
     public MailBoxEntity getMailBox() {

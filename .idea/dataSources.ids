@@ -17,23 +17,8 @@
       </library>
     </libraries>
     <schema name="" catalog="test"/>
-    <table name="folders" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="mailBox" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="FK_29d8c471e780405abcb2e03849a" columns="mailBox" ref-table="mail_boxes" ref-schema="" ref-catalog="test" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-    </table>
-    <table name="mail_boxes" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="date_create" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
-      <column name="name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="FK_29d8c471e780405abcb2e03849a" table="folders" schema="" catalog="test" columns="mailBox"/>
-    </table>
     <table name="mails" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="body" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
       <column name="date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="mail_box_owner_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -41,15 +26,6 @@
       <column name="mail_to" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
       <column name="is_read" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7"/>
       <column name="subject" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="users" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="first_name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="last_name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="login" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="pass" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="phone" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>

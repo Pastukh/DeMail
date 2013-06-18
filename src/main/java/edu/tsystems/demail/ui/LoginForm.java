@@ -27,7 +27,9 @@ public class LoginForm {
     private JFrame frame;
     private UserService userService;// = new UserService();
     private LoginDTO loginDTO;
-    private UserDTO userDTO;
+    private UserDTO userDTO = new UserDTO();
+    ;
+    private boolean isLogin;
 
     public LoginForm() {
         closeButton.addActionListener(new ActionListener() {
@@ -39,7 +41,8 @@ public class LoginForm {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loginUser();
+                isLogin = loginUser();
+                if (isLogin) new FolderForm().start(userDTO);
             }
         });
         registerButton.addActionListener(new ActionListener() {
@@ -51,10 +54,10 @@ public class LoginForm {
         });
     }
 
-    public void loginUser() {
+    public boolean loginUser() {
+        isLogin = false;
         userService = new UserService();
         loginDTO = new LoginDTO();
-        userDTO = new UserDTO();
         loginDTO.setLogin(textField1.getText());
         loginDTO.setPassword(Arrays.toString(passwordField1.getPassword()));
         System.out.println(loginDTO.getPassword());
@@ -63,10 +66,12 @@ public class LoginForm {
         System.out.println("test");
 
         userDTO = userService.login(loginDTO);
-        if (userDTO != null)
+        if (userDTO != null) isLogin = true;
+        if (isLogin) {
             ConnectionStatus.setText(userDTO.getFirstname() + userDTO.getLastname() + userDTO.getMailBox() + " is connected");
-        else
+        } else
             ConnectionStatus.setText("Check entered data!");
+        return isLogin;
     }
 
     public void start() {

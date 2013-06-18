@@ -24,7 +24,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column (name = "login", length = 30)
+    @Column (name = "login", length = 30, unique = true)
     @NotNull
     private String login;
     @Column (name = "first_name", length = 30)
@@ -37,7 +37,7 @@ public class UserEntity {
     private String phone;
     @Column (name = "pass", length = 30)
     private String pass;
-    @OneToOne
+    @OneToOne//(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private MailBoxEntity mailBox;
 

@@ -30,6 +30,7 @@ public class FolderService {
             FolderDTO folderDTO = new FolderDTO();
             folderDTO.setId(folder.getId());
             folderDTO.setName(folder.getName());
+            folderDTO.setSystem(folder.isSystem());
 
             folders.add(folderDTO);
         }
@@ -51,13 +52,21 @@ public class FolderService {
 
 
     public void createFolder(FolderDTO folderDTO) {
-        FolderEntity folderEntity = new FolderEntity();
+//        FolderEntity folderEntity = new FolderEntity();
 
 //        MailBoxEntity mailBoxEntity = ((UserEntity)userDAO.get(UserEntity.class, folderDTO.getUserId())).getMailBox();
 //        folderEntity.setMailBox(mailBoxEntity);
 //        folderEntity.setName(folderDTO.getName());
+//        folderEntity.setSystem(folderDTO.isSystem());
 
-        folderDAO.create(folderEntity);
+//        folderDAO.create(folderEntity);
+    }
+    public void removeFolder(int folderId) {
+//        FolderEntity folderEntity = (FolderEntity) folderDAO.get(FolderEntity.class, folderId);
+//        if(!folderEntity.isSystem()) {
+//            mailService.removeEmailFromFolder(folderId);
+//            folderDAO.delete(folderEntity);
+//        }
     }
 
 

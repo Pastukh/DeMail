@@ -6,10 +6,10 @@ package edu.tsystems.demail.DTO;
  * Time: 13:14
  */
 public class FolderDTO {
-    private String name;
-    private Boolean systemFolder;
     private int id;
     private int userId;
+    private String name;
+    private Boolean systemFolder;
     private int mailBoxId;
 
     public String getName() {
@@ -48,7 +48,15 @@ public class FolderDTO {
         return mailBoxId;
     }
 
+
     public void setMailBoxId(int mailBoxId) {
         this.mailBoxId = mailBoxId;
+    }
+    public Boolean isSystem() {
+        return systemFolder;
+    }
+
+    public void setSystem(Boolean system) {
+        this.systemFolder = system;
     }
 }
