@@ -1,5 +1,7 @@
 package edu.tsystems.demail.model;
 
+
+//import javax.validation.constraints.NotNull;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
@@ -22,7 +24,7 @@ import javax.persistence.*;
 })
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column (name = "login", length = 30)
     @NotNull
@@ -34,25 +36,22 @@ public class UserEntity {
     @NotNull
     private String last_name;
     @Column (name = "phone", length = 30)
-    @NotNull
     private String phone;
     @Column (name = "pass", length = 30)
-    @NotNull
     private String pass;
     @OneToOne
     @PrimaryKeyJoinColumn
-    private MBoxEntity mailBox;
+    private MailBoxEntity mailBox;
 
     public UserEntity() {
     }
 
-    public UserEntity(String login, String first_name, String last_name, String phone, String pass, MBoxEntity mailBox) {
+    public UserEntity(String login, String first_name, String last_name, String phone, String pass) {
         this.login = login;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
         this.pass = pass;
-        this.mailBox = mailBox;
     }
 
     public String getLogin() {
@@ -103,11 +102,11 @@ public class UserEntity {
         this.pass = pass;
     }
 
-    public MBoxEntity getMailBox() {
+    public MailBoxEntity getMailBox() {
         return mailBox;
     }
 
-    public void setMailBox(MBoxEntity mailBox) {
+    public void setMailBox(MailBoxEntity mailBox) {
         this.mailBox = mailBox;
     }
 

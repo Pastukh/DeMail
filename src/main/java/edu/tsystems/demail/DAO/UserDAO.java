@@ -1,6 +1,9 @@
-package edu.tsystems.demail.model;
+package edu.tsystems.demail.DAO;
+
+import edu.tsystems.demail.model.UserEntity;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -13,7 +16,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class UserDAO {
-    private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();;
+//    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+    private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
+    public UserDAO() {
+
+    }
 
     public UserEntity getUser(int id){
         return em.find(UserEntity.class, id);
@@ -47,7 +54,11 @@ public class UserDAO {
         }
         return query.getResultList();
     }
-    public void create (UserEntity user){
-        em.persist(user);
+    public int create (UserEntity user){
+        int userId = 0;
+        em.getTransaction().begin();
+        userId = em.merge(user).getId();
+        em.getTransaction().commit();
+        return userId;
     }
 }

@@ -1,0 +1,2 @@
+INSERT INTO test.users (login, first_name, last_name, phone, pass) VALUES ('root', 'Ivan', 'Petrov', '9115670123', '12345');
+INSERT INTO test.users (login, first_name, last_name, phone, pass) VALUES ('user', 'Petr', 'Sidorov', '9132215643', '1212');

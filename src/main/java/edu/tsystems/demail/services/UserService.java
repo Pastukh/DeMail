@@ -1,15 +1,9 @@
-package edu.tsystems.demail;
+package edu.tsystems.demail.services;
 
 import edu.tsystems.demail.DTO.LoginDTO;
 import edu.tsystems.demail.DTO.UserDTO;
-import edu.tsystems.demail.model.UserDAO;
+import edu.tsystems.demail.DAO.UserDAO;
 import edu.tsystems.demail.model.UserEntity;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -20,18 +14,23 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class UserService {
-    private UserDAO userDAO = new UserDAO();
+    private static UserDAO userDAO = new UserDAO();
     ///private MailBoxDAO mailBoxDAO;
     //private FolderDAO folderDAO;
+
+    public UserService() {
+//        userDAO = new UserDAO();
+    }
+
     /**
      * Select user by loginDTO
      * @return user dto
      */
+
     public UserDTO login(LoginDTO loginDTO) {
         UserEntity userEntity = userDAO.getUserByLoginAndPassword(loginDTO.getLogin(), loginDTO.getPassword());
 
         if(userEntity == null) return null;
-
         return createUserDTOFromEntity(userEntity);
     }
 
@@ -46,10 +45,10 @@ public class UserService {
         userDTO.setLogin(userEntity.getLogin());
         userDTO.setFirstname(userEntity.getFirst_name());
         userDTO.setLastname(userEntity.getLast_name());
-        userDTO.setMailBox(userEntity.getMailBox().getMailBox());
+//        userDTO.setMailBox(userEntity.getMailBox().getMailBox());
         return userDTO;
     }
-    private UserEntity createNewUser(String login, String password, String firstname,
+    public UserEntity createNewUser(String login, String password, String firstname,
                                      String lastname, String phone) {
 
 
@@ -60,7 +59,7 @@ public class UserService {
         userEntity.setLast_name(lastname);
         userEntity.setPhone(phone);
         // create new user
-        userDAO.create(userEntity);
+        userEntity.setId(userDAO.create(userEntity));
         return userEntity;
     }
 }

@@ -2,8 +2,10 @@ package edu.tsystems.demail.model;
 
 import com.sun.istack.internal.NotNull;
 
+//import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,24 +16,27 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "mail_boxes")
-public class MBoxEntity {
+public class MailBoxEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "user_id")
     private int userId;
     @NotNull
-    @Column(name = "mail_box")
+    @Column(name = "name",  length = 30)
     private String mailBox;
     @Column(name = "date_create")
     @Temporal(TemporalType.DATE)
     private java.util.Date dateCreate;
     @OneToOne(mappedBy = "mailBox")
     private UserEntity user;
+    @OneToMany(mappedBy = "mailBox")
+    private List<FolderEntity> folders;
 
-    public MBoxEntity() {
+    public MailBoxEntity() {
     }
 
-    public MBoxEntity(int id, int userId, String mailBox, Date dateCreate, UserEntity user) {
+    public MailBoxEntity(int id, int userId, String mailBox, Date dateCreate, UserEntity user) {
         this.id = id;
         this.userId = userId;
         this.mailBox = mailBox;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="local Data Source" product="MySQL" version="5.6.11-log" jdbc-version="4.0" driver-name="MySQL-AB JDBC Driver" driver-version="mysql-connector-java-5.1.22 ( Revision: ${bzr.revision-id} )" uuid="86a83a5a-8ae4-4325-8071-7952901b8bfb">
+  <data-source source="LOCAL" name="local Data Source" product="MySQL" version="5.6.11-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.25 ( Revision: ${bzr.revision-id} )" uuid="86a83a5a-8ae4-4325-8071-7952901b8bfb">
     <extra-name-characters>#@</extra-name-characters>
     <identifier-quote-string>`</identifier-quote-string>
     <synchronize>true</synchronize>
@@ -13,43 +13,41 @@
     <default-dialect>MySQL</default-dialect>
     <libraries>
       <library>
-        <url>jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.22-bin.jar!/</url>
-      </library>
-      <library>
-        <url>file://$PROJECT_DIR$/lib/mysql-connector-license.txt</url>
+        <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar!/</url>
       </library>
     </libraries>
     <schema name="" catalog="test"/>
-    <table name="email" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="email_from" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="email_to" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="subject" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="body" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91"/>
-      <column name="is_read" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
-      <column name="mail_box_ownner_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="folder" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-    </table>
     <table name="folders" schema="" catalog="test" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="mail_box__id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="mail_boxes" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="mail_box" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="date_create" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
+      <column name="name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="mails" schema="" catalog="test" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="body" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="mail_box_owner_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="mail_from" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <column name="mail_to" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <column name="is_read" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7"/>
+      <column name="subject" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="users" schema="" catalog="test" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="login" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
-      <column name="first_name" sqlType="VARCHAR" length="30" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="first_name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
       <column name="last_name" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="phone" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <column name="login" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
       <column name="pass" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
-      <column name="mailBox" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="phone" sqlType="VARCHAR" length="30" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>
 </component>

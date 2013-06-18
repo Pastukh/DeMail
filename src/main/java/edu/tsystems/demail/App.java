@@ -1,12 +1,7 @@
 package edu.tsystems.demail;
 
-import edu.tsystems.demail.DTO.UserDTO;
-import edu.tsystems.demail.model.UserDAO;
-import edu.tsystems.demail.model.UserEntity;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import java.util.List;
+import edu.tsystems.demail.ui.LoginForm;
+import edu.tsystems.demail.ui.Test;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,9 +12,12 @@ import java.util.List;
  */
 public class App {
     public static void main (String[] args){
-        new Presentation().start();
+       LoginForm loginForm = new LoginForm();
+       loginForm.start();
+//        Test testForm = new Test();
+//        testForm.createUIComponents();
+
 //        List<UserEntity> users;
-//
 //        UserDAO dao = new UserDAO();
 //        users = dao.getUserByLogin("user");
 //        for (UserEntity u: users){
