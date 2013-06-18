@@ -3,11 +3,9 @@ package edu.tsystems.demail.DTO;
 import java.util.Date;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
+ * Author: Ivan Pastukh
  * Date: 12.06.13
  * Time: 13:33
- * To change this template use File | Settings | File Templates.
  */
 public class UserDTO {
     private int id;
@@ -69,9 +67,16 @@ public class UserDTO {
     public void setMailBox(String mailBox) {
         this.mailBox = mailBox;
     }
+
     @Override
     public String toString() {
-        return "UserDTO(id="+id+";login="+login+";firstname="+firstname+";lastname="+lastname+";birthdate="+birthdate
-                +";mail_box="+mailBox+")";
+        return "UserDTO{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", birthdate=" + birthdate +
+                ", mailBox='" + mailBox + '\'' +
+                '}';
     }
 }

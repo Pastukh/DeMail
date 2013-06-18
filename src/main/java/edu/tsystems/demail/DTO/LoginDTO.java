@@ -1,11 +1,9 @@
 package edu.tsystems.demail.DTO;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
+ * Author: Ivan Pastukh
  * Date: 12.06.13
  * Time: 13:31
- * To change this template use File | Settings | File Templates.
  */
 public class LoginDTO {
     private String login;

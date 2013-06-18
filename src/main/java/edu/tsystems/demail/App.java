@@ -1,7 +1,6 @@
 package edu.tsystems.demail;
 
 import edu.tsystems.demail.ui.LoginForm;
-import edu.tsystems.demail.ui.Test;
 
 /**
  * Created with IntelliJ IDEA.

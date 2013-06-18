@@ -11,31 +11,24 @@ import java.util.List;
 
 /**
  * Author: Ivan Pastukh
- * Date: 18.06.13
- * Time: 13:45
+ * Date: 17.06.13
+ * Time: 11:12
  */
 public class FolderDAO {
     private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
-    /**
-     * Return folder's list by user id
-     * @param userId user id
-     * @return list of folders
-     */
-    public List<FolderEntity> getFoldersByUserId(Long userId) {
+
+    public List<FolderEntity> getFoldersByUserId(int userId) {
         TypedQuery<FolderEntity> foldersQuery = em.createNamedQuery("FolderEntity.getFoldersByUserId", FolderEntity.class)
                 .setParameter("userId", userId);
 
         return foldersQuery.getResultList();
     }
 
-    /**
-     * Create system folders: incoming, sent, trash for mail box by id.
-     * @param mailBox mail box id
-     */
+
     public void createDefaultFoldersForMailBox(MailBoxEntity mailBox) {
         System.out.println("DAO LEVEL: " + mailBox);
         FolderEntity incoming = new FolderEntity();
-        incoming.setMailBox(mailBox);
+        incoming .setMailBox(mailBox);
         incoming.setName("Inbox");
 
         FolderEntity sent = new FolderEntity();
@@ -51,20 +44,20 @@ public class FolderDAO {
         em.persist(trash);
     }
 
-    /**
-     * Search incoming folder by name and user id.
-     * @param name folder name
-     * @param userId user id
-     * @return folder id
-     */
-    public Long getFolderIdByNameAndUserId(String name, Long userId) {
+
+    public int getFolderIdByNameAndUserId(String name, int userId) {
         TypedQuery<FolderEntity> queryFolder = em.createNamedQuery("FolderEntity.getFolderByNameAndUserId", FolderEntity.class)
                 .setParameter("name", name)
                 .setParameter("userId", userId);
 
         List<FolderEntity> folderEntities = queryFolder.getResultList();
-        if(folderEntities.size() != 1) return null; // @TODO
+        if(folderEntities.size() != 1) return -1;
 
         return folderEntities.get(0).getId();
+    }
+    public void create (FolderEntity folderEntity){
+        em.getTransaction().begin();
+        em.merge(folderEntity);
+        em.getTransaction().commit();
     }
 }

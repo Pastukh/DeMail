@@ -9,11 +9,9 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
+ * Author: Ivan Pastukh
  * Date: 07.06.13
  * Time: 16:30
- * To change this template use File | Settings | File Templates.
  */
 public class UserDAO {
 //    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
@@ -40,11 +38,7 @@ public class UserDAO {
         if(result.size() != 1) return null;
         return result.get(0);
     }
-    /**
-     * search user by login
-     * @param login login
-     * @return list of entity
-     */
+
     public List<UserEntity> getUserByLogin(String login) {
         TypedQuery<UserEntity> query = em.createNamedQuery("UserEntity.findByLogin", UserEntity.class)
                 .setParameter("login", login);

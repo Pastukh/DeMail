@@ -10,11 +10,9 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
+ * Author: Ivan Pastukh
  * Date: 06.06.13
  * Time: 14:21
- * To change this template use File | Settings | File Templates.
  */
 public class LoginForm {
     private JButton button1;
@@ -128,6 +126,7 @@ public class LoginForm {
         registerButton.setText("Register");
         panel1.add(registerButton, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         passwordField1 = new JPasswordField();
+        passwordField1.setText("123");
         panel1.add(passwordField1, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 

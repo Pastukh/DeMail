@@ -7,11 +7,9 @@ import com.sun.istack.internal.NotNull;
 import javax.persistence.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: B
+ * Author: Ivan Pastukh
  * Date: 07.06.13
  * Time: 12:44
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 @Table(name="users")

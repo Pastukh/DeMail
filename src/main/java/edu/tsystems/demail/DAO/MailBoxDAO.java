@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 /**
  * Author: Ivan Pastukh
- * Date: 18.06.13
+ * Date: 17.06.13
  * Time: 2:34
  */
 public class MailBoxDAO {
