@@ -1,22 +1,21 @@
 package edu.tsystems.demail.services;
 
+import edu.tsystems.demail.DAO.FolderDAO;
+import edu.tsystems.demail.DAO.UserDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Author: Ivan Pastukh
  * Date: 18.06.13
- * Time: 13:41
+ * Time: 11:41
  */
 public class FolderService {
     private FolderDAO folderDAO;
     private UserDAO userDAO;
-    private MailService mailService;
-    /**
-     * Return fodlers's list by user id
-     * @param userId user id
-     * @return folder's list
-     */
+    //private MailService mailService;
+
     public List<FolderDTO> getFoldersByUserId(Long userId) {
         List<FolderEntity> folderEntities = folderDAO.getFoldersByUserId(userId);
 
@@ -34,10 +33,7 @@ public class FolderService {
         return folders;
     }
 
-    /**
-     * Create default folder for new mail box from mail box transfer object
-     * @param mailBox mail box to
-     */
+
     public void createDefaultFolderForMailBoxId(MailBoxDTO mailBox) {
         // prepare new folders
         MailBoxEntity mailBoxEntity = new MailBoxEntity();
@@ -48,10 +44,7 @@ public class FolderService {
         folderDAO.createDefaultFoldersForMailBox(mailBoxEntity);
     }
 
-    /**
-     * Create new folder from folder transfer object
-     * @param folderDTO transfer object
-     */
+
     public void createFolder(FolderDTO folderDTO) {
         FolderEntity folderEntity = new FolderEntity();
 
@@ -64,10 +57,6 @@ public class FolderService {
         folderDAO.create(folderEntity);
     }
 
-    /**
-     * Remove folder if isn't system
-     * @param folderId folder id
-     */
     public void removeFolder(Long folderId) {
         FolderEntity folderEntity = (FolderEntity) folderDAO.get(FolderEntity.class, folderId);
         if(!folderEntity.isSystem()) {
