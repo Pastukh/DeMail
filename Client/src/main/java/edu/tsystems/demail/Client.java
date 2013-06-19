@@ -32,48 +32,39 @@ public class Client{
 
         App.main(args);
     }
-    public static boolean sendTask(String key, BaseDTO baseDTO) throws IOException {
+    public static void sendTask(String key, BaseDTO baseDTO) throws IOException {
         ObjectOutputStream out = null;
-        ObjectInputStream in = null;
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
 
             out.writeObject(key);
             out.writeObject(baseDTO);
 
             out.flush();
 
-            if (in.readObject().toString().equals("TRUE")) return true;
-            else return false;
         } catch (IOException ex) {
             ex.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } finally {
             //System.exit(0);
         }
-        return false;
     }
 
-    public static boolean getAnswer(Properties data)
+    public static BaseDTO getAnswer()
     {
-        ObjectOutputStream out = null;
         ObjectInputStream in = null;
         try {
-            out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-            out.writeObject(data);
-            out.flush();
-            if(in.readObject().toString().equals("true"))
-                return true;
-            else return false;
+            String key = (String)in.readObject();
+            if (key.equals("TRUE")){
+                return  (BaseDTO)in.readObject();
+            }
+            else return null;
         } catch (IOException ex) {
             ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return false;
+        return null;
     }
 
     public static List getList(Properties data)

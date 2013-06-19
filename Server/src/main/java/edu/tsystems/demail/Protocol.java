@@ -28,10 +28,11 @@ public class Protocol extends Thread {
     public void run() {
         System.out.println("Connection accepted");
         ObjectInputStream in = null;
+        ObjectOutputStream out = null;
         try {
             while (true){
                 in = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                out = new ObjectOutputStream(socket.getOutputStream());
 
                 String key = (String)in.readObject();
                 if (key.equals("LOGIN")){
@@ -44,6 +45,8 @@ public class Protocol extends Thread {
                     if (userDTO != null) isLogin = true;
                     if (isLogin) {
                         out.writeObject("TRUE");
+                        out.writeObject(userDTO);
+                        out.flush();
                         System.out.println(loginDTO.getLogin() + " logined.");
                     } else out.writeObject("FALSE");
                 }

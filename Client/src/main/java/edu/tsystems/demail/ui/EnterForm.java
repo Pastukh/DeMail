@@ -21,14 +21,14 @@ public class EnterForm {
     private JButton button1;
     private JPanel panel1;
     private JTextField textField1;
-//    private JTextField textField2;
+    //    private JTextField textField2;
     private JLabel ConnectionStatus;
     private JButton registerButton;
     private JButton closeButton;
     private JPasswordField passwordField1;
     private JLabel label1;
     private JFrame frame;
-//    private UserService userService;
+    //    private UserService userService;
     private LoginDTO loginDTO;
     private UserDTO userDTO = new UserDTO();
     ;
@@ -56,22 +56,27 @@ public class EnterForm {
         });
     }
 
-    public void loginUser() {
+    public UserDTO loginUser() {
+        UserDTO user = null;
         try {
-            LoginDTO user = new LoginDTO();
-            user.setLogin(textField1.getText());
-            user.setPassword(Arrays.toString(passwordField1.getPassword()));
-            Client.sendTask("LOGIN", user);
+            user = new UserDTO();
+            LoginDTO login = new LoginDTO();
+            login.setLogin(textField1.getText());
+            login.setPassword(Arrays.toString(passwordField1.getPassword()));
+            Client.sendTask("LOGIN", login);
+            user = (UserDTO) Client.getAnswer();
+            if (user != null) {
+                ConnectionStatus.setText("Welcome, " + user.getFirstname() + "!");
+            } else ConnectionStatus.setText("Check entered data, please.");
         } catch (IOException e) {
+            ConnectionStatus.setText("Connection error!");
             e.printStackTrace();
         }
+        return user;
     }
 
     public void start() {
         createUIComponents();
-
-
-
 
 
 //        userService = new UserService();
