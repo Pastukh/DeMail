@@ -1,15 +1,15 @@
 package edu.tsystems.demail;
 
+import edu.tsystems.demail.DTO.BaseDTO;
+import edu.tsystems.demail.DTO.LoginDTO;
+import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.services.UserService;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Properties;
-import java.io.EOFException;
+import java.net.SocketException;
 
 /**
  * Author: Ivan Pastukh
@@ -17,19 +17,61 @@ import java.io.EOFException;
  * Time: 23:28
  */
 
-
-    public class Protocol extends Thread {
-
-//        private Socket socket;
-//        private ProtocolCommands pc;
-//        private ProtocolParameters pp;
+public class Protocol extends Thread {
+    private Socket socket;
 //
-//        public Protocol(Socket socket) {
-//            this.socket = socket;
-//            this.pc = new ProtocolCommands();
-//            this.pp = new ProtocolParameters();
-//            this.start();
-//        }
+    public Protocol(Socket socket) {
+        this.socket = socket;
+        this.start();
+        }
+    @Override
+    public void run() {
+        System.out.println("Connection accepted");
+        ObjectInputStream in = null;
+        try {
+            while (true){
+                in = new ObjectInputStream(socket.getInputStream());
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+
+                String key = (String)in.readObject();
+                if (key.equals("LOGIN")){
+                    boolean isLogin = false;
+                    LoginDTO loginDTO = new LoginDTO();
+                    loginDTO = (LoginDTO)in.readObject();
+                    System.out.println("LOGIN ->" + loginDTO.getLogin());
+                    UserService userService = new UserService();
+                    UserDTO userDTO = userService.login(loginDTO);
+                    if (userDTO != null) isLogin = true;
+                    if (isLogin) {
+                        out.writeObject("TRUE");
+                        System.out.println(loginDTO.getLogin() + " logined.");
+                    } else out.writeObject("FALSE");
+                }
+
+                if (key.equals("REG")){
+                    System.out.println("KEY - > REG");
+                }
+//                if (user != null){
+//                    System.out.println((UserDTO)user.getLogin());
+//                    System.exit(0);
+//                }
+                else if (key.equals("EXIT")){
+                    System.out.println("EXIT");
+                    System.exit(0);
+                }
+            }
+        }
+        catch(SocketException ex){
+            System.out.println("Client is disconnected!");
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            System.exit(0);
+        }
+    }
 //
 //        @Override
 //        public void run() {

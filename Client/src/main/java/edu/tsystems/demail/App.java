@@ -1,7 +1,6 @@
 package edu.tsystems.demail;
 
-import edu.tsystems.demail.ui.FolderForm;
-import edu.tsystems.demail.ui.LoginForm;
+import edu.tsystems.demail.ui.EnterForm;
 
 /**
  * Author: Ivan Pastukh
@@ -10,8 +9,8 @@ import edu.tsystems.demail.ui.LoginForm;
  */
 public class App {
     public static void main (String[] args){
-       LoginForm loginForm = new LoginForm();
-       loginForm.start();
+       EnterForm enterForm = new EnterForm();
+       enterForm.start();
 //        FolderForm folderForm = new FolderForm();
 //        folderForm.start();
 //        Test test = new Test();

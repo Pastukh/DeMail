@@ -12,12 +12,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Server {
+    private static ServerSocket ss;
 
-    //public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+    public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         try {
-            ServerSocket ss = new ServerSocket(1234);
+            ss = new ServerSocket(1234);
             System.out.println("Server is started!");
             System.out.println("Waiting a client....");
             while (true)
@@ -26,10 +27,13 @@ public class Server {
                 while(socket == null){
                     socket = ss.accept();
                 }
-                //new Protocol(socket);
+                new Protocol(socket);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+        finally {
+           ss.close();
         }
     }
 }

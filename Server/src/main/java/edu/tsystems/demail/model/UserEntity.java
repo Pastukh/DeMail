@@ -1,8 +1,6 @@
 package edu.tsystems.demail.model;
 
 
-//import javax.validation.constraints.NotNull;
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
 
@@ -20,18 +18,12 @@ import javax.persistence.*;
     @NamedQuery(name = "UserEntity.findByLoginAndPassword",
         query = "SELECT u FROM UserEntity u WHERE u.login = :login AND u.pass = :password")
 })
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column (name = "login", length = 30, unique = true)
-    @NotNull
+public class UserEntity extends BaseEntity {
+    @Column (name = "login", length = 30, unique = true, nullable = false)
     private String login;
-    @Column (name = "first_name", length = 30)
-    @NotNull
+    @Column (name = "first_name", length = 30, nullable = false)
     private String first_name;
-    @Column (name = "last_name", length = 30)
-    @NotNull
+    @Column (name = "last_name", length = 30, nullable = false)
     private String last_name;
     @Column (name = "phone", length = 30)
     private String phone;
@@ -58,14 +50,6 @@ public class UserEntity {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirst_name() {

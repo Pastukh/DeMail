@@ -10,10 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "mails")
-public class MailEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class MailEntity extends BaseEntity {
     @Column(name = "mail_from", length = 30)
     private String mailFrom;
     @Column(name = "mail_to",  length = 30)
@@ -31,14 +28,6 @@ public class MailEntity {
     @OneToOne
     @PrimaryKeyJoinColumn
     private FolderEntity folder;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getMailFrom() {
         return mailFrom;

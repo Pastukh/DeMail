@@ -17,10 +17,7 @@ import javax.persistence.*;
     @NamedQuery(name = "FolderEntity.getFolderByNameAndUserId",
             query = "SELECT f FROM FolderEntity f WHERE f.name = :name AND f.mailBox.userId = :userId")
 })
-public class FolderEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class FolderEntity extends BaseEntity {
     @Column(name = "name",  length = 30)
     private String name;
     @Column(name = "is_system")
@@ -29,14 +26,6 @@ public class FolderEntity {
     @JoinColumn(name = "mailBox")
     private MailBoxEntity mailBox;
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

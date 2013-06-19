@@ -1,8 +1,5 @@
 package edu.tsystems.demail.model;
 
-import com.sun.istack.internal.NotNull;
-
-//import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "mail_boxes")
-public class MailBoxEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class MailBoxEntity extends BaseEntity {
     @Column(name = "user_id")
     private int userId;
-    @NotNull
-    @Column(name = "name",  length = 30)
+    @Column(name = "name",  length = 30, nullable = false)
     private String mailBox;
     @Column(name = "date_create")
     @Temporal(TemporalType.DATE)
@@ -32,14 +25,6 @@ public class MailBoxEntity {
     private List<FolderEntity> folders;
 
     public MailBoxEntity() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getUserId() {
@@ -76,4 +61,5 @@ public class MailBoxEntity {
                 ", folders=" + folders +
                 '}';
     }
+
 }
