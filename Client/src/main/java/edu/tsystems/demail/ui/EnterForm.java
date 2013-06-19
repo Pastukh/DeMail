@@ -31,7 +31,6 @@ public class EnterForm {
     //    private UserService userService;
     private LoginDTO loginDTO;
     private UserDTO userDTO = new UserDTO();
-    ;
     private boolean isLogin;
 
     public EnterForm() {
@@ -44,13 +43,13 @@ public class EnterForm {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                loginUser();
+                isLogin = (loginUser() != null);
             }
         });
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                new RegForm().createUI();
+                new RegistrationForm().createUI();
 
             }
         });

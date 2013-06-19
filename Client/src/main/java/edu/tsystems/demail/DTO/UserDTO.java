@@ -18,7 +18,14 @@ public class UserDTO extends BaseDTO {
     public UserDTO() {
     }
 
-
+    public UserDTO(int id, String login, String firstname, String lastname, Date birthdate, String mailBox) {
+        this.id = id;
+        this.login = login;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.mailBox = mailBox;
+    }
 
     public int getId() {
         return id;

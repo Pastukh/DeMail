@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="edu.tsystems.demail.ui.RegistrationForm">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="14" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="218" height="400"/>
+    </constraints>
+    <properties>
+      <name value="panel1"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="7d939" class="javax.swing.JButton" binding="submitButton" default-binding="true">
+        <constraints>
+          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="26"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="&amp;Submit"/>
+        </properties>
+      </component>
+      <component id="5c35f" class="javax.swing.JTextField" binding="loginTextField" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="22"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="user"/>
+        </properties>
+      </component>
+      <component id="75008" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="14"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="5c35f"/>
+          <text value="Login"/>
+        </properties>
+      </component>
+      <component id="585c9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="14"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="4ab78"/>
+          <text value="First name"/>
+        </properties>
+      </component>
+      <component id="4ab78" class="javax.swing.JTextField" binding="firstNameTextField" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="22"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="myke"/>
+        </properties>
+      </component>
+      <component id="78ba6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="14"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="ee37b"/>
+          <text value="Last Name"/>
+        </properties>
+      </component>
+      <component id="ee37b" class="javax.swing.JTextField" binding="lastNameTextField" default-binding="true">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="22"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Djobs"/>
+        </properties>
+      </component>
+      <component id="27ae1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="14"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="e712c"/>
+          <text value="Password"/>
+        </properties>
+      </component>
+      <component id="b1b1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="14"/>
+          </grid>
+        </constraints>
+        <properties>
+          <labelFor value="f0895"/>
+          <text value="Phone number"/>
+        </properties>
+      </component>
+      <component id="f0895" class="javax.swing.JTextField" binding="phoneNumberTextField" default-binding="true">
+        <constraints>
+          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="22"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="32222"/>
+        </properties>
+      </component>
+      <component id="e712c" class="javax.swing.JPasswordField" binding="passwordPasswordField" default-binding="true">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="194" height="24"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="123"/>
+        </properties>
+      </component>
+      <component id="8ea74" class="javax.swing.JPasswordField" binding="password2PasswordField">
+        <constraints>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="123"/>
+        </properties>
+      </component>
+      <component id="c199f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <labelFor value="2236a"/>
+          <text value="MailBox"/>
+        </properties>
+      </component>
+      <component id="2236a" class="javax.swing.JTextField" binding="mailBoxTextField">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="user@demail.de"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

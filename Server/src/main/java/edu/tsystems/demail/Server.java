@@ -27,7 +27,7 @@ public class Server {
                 while(socket == null){
                     socket = ss.accept();
                 }
-                new Protocol(socket);
+                new Core(socket);
             }
         } catch (IOException ex) {
             ex.printStackTrace();

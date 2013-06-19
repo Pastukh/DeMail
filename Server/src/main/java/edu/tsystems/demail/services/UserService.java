@@ -1,6 +1,7 @@
 package edu.tsystems.demail.services;
 
 import edu.tsystems.demail.DTO.LoginDTO;
+import edu.tsystems.demail.DTO.RegDTO;
 import edu.tsystems.demail.DTO.UserDTO;
 import edu.tsystems.demail.DAO.UserDAO;
 import edu.tsystems.demail.model.UserEntity;
@@ -39,6 +40,18 @@ public class UserService {
      * @param userEntity user entity
      * @return user dto
      */
+
+    public UserDTO createNewUser(RegDTO regDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLogin(regDTO.getLogin());
+        userEntity.setPass(regDTO.getPassword());
+        userEntity.setFirst_name(regDTO.getFirstname());
+        userEntity.setLast_name(regDTO.getLastname());
+        userEntity.setPhone(regDTO.getPhone());
+        // create new user
+        userEntity.setId(userDAO.create(userEntity));
+        return createUserDTOFromEntity(userEntity);
+    }
     private UserDTO createUserDTOFromEntity(UserEntity userEntity) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(userEntity.getId());
