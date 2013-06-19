@@ -1,7 +1,7 @@
 package edu.tsystems.demail;
 
+
 import edu.tsystems.demail.DTO.BaseDTO;
-import edu.tsystems.demail.DTO.LoginDTO;
 
 import java.util.List;
 import java.io.IOException;
@@ -23,12 +23,6 @@ public class Client{
     public static void main(String[] args) throws IOException {
 
        Client.socket = new Socket("localhost", 1234);
-
-//        LoginDTO user = new LoginDTO();
-//        user.setLogin("IVAN PASTUKH");
-//        user.setPassword("123");
-//
-//        sendTask("REG", user);
 
         App.main(args);
     }

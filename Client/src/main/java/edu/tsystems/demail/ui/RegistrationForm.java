@@ -1,14 +1,8 @@
 package edu.tsystems.demail.ui;
 
 import edu.tsystems.demail.Client;
-import edu.tsystems.demail.DTO.MailBoxDTO;
-import edu.tsystems.demail.DTO.RegDTO;
-import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.DTO.*;
 import edu.tsystems.demail.Validator;
-//import edu.tsystems.demail.model.UserEntity;
-//import edu.tsystems.demail.services.FolderService;
-//import edu.tsystems.demail.services.MailBoxService;
-//import edu.tsystems.demail.services.UserService;
 
 import javax.swing.*;
 import java.awt.*;

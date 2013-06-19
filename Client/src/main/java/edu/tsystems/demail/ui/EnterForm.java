@@ -1,9 +1,7 @@
 package edu.tsystems.demail.ui;
 
 import edu.tsystems.demail.Client;
-import edu.tsystems.demail.DTO.LoginDTO;
-import edu.tsystems.demail.DTO.UserDTO;
-//import edu.tsystems.demail.services.UserService;
+import edu.tsystems.demail.DTO.*;
 
 import javax.swing.*;
 import java.awt.*;
