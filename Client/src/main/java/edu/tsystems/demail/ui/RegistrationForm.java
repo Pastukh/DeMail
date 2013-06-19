@@ -34,7 +34,7 @@ public class RegistrationForm {
     private JPasswordField passwordPasswordField;
     private JPasswordField password2PasswordField;
     private JTextField mailBoxTextField;
-//    private UserService userService = new UserService();
+    //    private UserService userService = new UserService();
     private Validator validator = new Validator();
     private MailBoxDTO mailBoxDTO;
 
@@ -62,6 +62,7 @@ public class RegistrationForm {
 
     public void createNewUser() throws IOException {
         boolean valid = false;
+        UserDTO userDTO = null;
 //        UserService userService = new UserService();
 //        validator;
 
@@ -76,10 +77,11 @@ public class RegistrationForm {
                     lastNameTextField.getText(),
                     phoneNumberTextField.getText()
             );
-            //create mail box for user
             Client.sendTask("REG", regDTO);
-//            mailBoxDTO = (MailBoxDTO)Client.getAnswer();
-//            createDefaultFolder();
+            userDTO = (UserDTO) Client.getAnswer();
+            if (userDTO != null) {
+                JOptionPane.showMessageDialog(panel1, "User " + userDTO.getLogin() + " is registered.");
+            } else JOptionPane.showMessageDialog(panel1, "User with login " + userDTO.getLogin() + " exists");
 
         }
 

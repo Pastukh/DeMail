@@ -2,7 +2,6 @@ package edu.tsystems.demail.ui;
 
 import edu.tsystems.demail.DTO.FolderDTO;
 import edu.tsystems.demail.DTO.UserDTO;
-import edu.tsystems.demail.model.FolderEntity;
 import edu.tsystems.demail.services.FolderService;
 
 import javax.swing.*;

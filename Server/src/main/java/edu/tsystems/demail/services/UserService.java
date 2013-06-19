@@ -2,8 +2,8 @@ package edu.tsystems.demail.services;
 
 import edu.tsystems.demail.DTO.LoginDTO;
 import edu.tsystems.demail.DTO.RegDTO;
-import edu.tsystems.demail.DTO.UserDTO;
 import edu.tsystems.demail.DAO.UserDAO;
+import edu.tsystems.demail.DTO.UserDTO;
 import edu.tsystems.demail.model.UserEntity;
 
 

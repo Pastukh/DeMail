@@ -1,9 +1,8 @@
 package edu.tsystems.demail;
 
-import edu.tsystems.demail.DTO.BaseDTO;
-import edu.tsystems.demail.DTO.LoginDTO;
-import edu.tsystems.demail.DTO.RegDTO;
-import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.DTO.*;
+import edu.tsystems.demail.services.FolderService;
+import edu.tsystems.demail.services.MailBoxService;
 import edu.tsystems.demail.services.UserService;
 
 import java.io.IOException;
@@ -61,9 +60,19 @@ public class Core extends Thread {
                     UserDTO userDTO = userService.createNewUser(regDTO);
                     System.out.println(userDTO + " registered");
 
-//                    System.out.println("create defaul folder for mail box " + mailBoxDTO.getMailbox());
-//                    FolderService folderService = new FolderService();
-//                    folderService.createDefaultFolderForMailBoxId(mailBoxDTO);
+                    MailBoxService mailBoxService = new MailBoxService();
+                    MailBoxDTO mailBoxDTO = new MailBoxDTO();
+                    mailBoxDTO = mailBoxService.createMailBox(userDTO);
+                    FolderService folderService = new FolderService();
+                    folderService.createDefaultFolderForMailBoxId(mailBoxDTO);
+                    System.out.println("create defaul folder for mail box " + mailBoxDTO.getMailbox());
+
+                    if (userDTO != null) {
+                        out.writeObject("TRUE");
+                        out.writeObject(userDTO);
+                        out.flush();
+                        System.out.println("User " + userDTO.getLogin() + " registered.");
+                    } else out.writeObject("FALSE");
                 }
 //                if (user != null){
 //                    System.out.println((UserDTO)user.getLogin());
