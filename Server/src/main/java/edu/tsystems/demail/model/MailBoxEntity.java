@@ -11,6 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "mail_boxes")
+@NamedQueries({
+@NamedQuery(name = "MailBoxEntity.getMailBoxByName",
+        query = "SELECT m FROM MailBoxEntity  m WHERE m.mailBox = :mailBox"),
+@NamedQuery(name = "MailBoxEntity.getMailBoxById",
+					query = "SELECT m FROM MailBoxEntity m WHERE id = :id")
+        })
 public class MailBoxEntity extends BaseEntity {
     @Column(name = "user_id")
     private int userId;

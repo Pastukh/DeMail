@@ -2,13 +2,16 @@ package edu.tsystems.demail;
 
 
 import edu.tsystems.demail.DTO.BaseDTO;
+import edu.tsystems.demail.DTO.UserDTO;
+import edu.tsystems.demail.ui.EnterForm;
+import edu.tsystems.demail.ui.MainForm;
+import edu.tsystems.demail.ui.NewMessage;
 
-import java.util.List;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Properties;
+import java.util.List;
 
 
 /**
@@ -21,38 +24,54 @@ public class Client{
     public static Socket socket;
 
     public static void main(String[] args) throws IOException {
-
-       Client.socket = new Socket("localhost", 1234);
-
-        App.main(args);
+       Client.socket = new Socket("localhost", 3434);
+//       App.main(args);
+        new EnterForm().start();
+//        UserDTO userDTO = new UserDTO();
+//        userDTO.setId(1);
+//        userDTO.setLogin("user");
+//        new NewMessage().start(userDTO);
     }
-    public static void sendTask(String key, BaseDTO baseDTO) throws IOException {
+
+    public static void sendTask(String command, BaseDTO baseDTO) throws IOException {
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
-
-            out.writeObject(key);
+            out.writeObject(command);
             out.writeObject(baseDTO);
-
             out.flush();
-
         } catch (IOException ex) {
             ex.printStackTrace();
-        } finally {
-            //System.exit(0);
         }
     }
 
-    public static BaseDTO getAnswer()
-    {
+    public static BaseDTO getAnswer() {
         ObjectInputStream in = null;
+        String command;
         try {
             in = new ObjectInputStream(socket.getInputStream());
-            String key = (String)in.readObject();
-            if (key.equals("TRUE")){
-                return  (BaseDTO)in.readObject();
-            }
-            else return null;
+            command = (String)in.readObject();
+            if (command.equals("OK"))
+                return (BaseDTO)in.readObject();
+            else if (command.equals("ERR"))
+                System.out.println("ERROR! Server return ERR.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static List<BaseDTO> getList() {
+        ObjectInputStream in = null;
+        String command;
+        try {
+            in = new ObjectInputStream(socket.getInputStream());
+            command = (String)in.readObject();
+            if (command.equals("LIST"))
+                return (List<BaseDTO>)in.readObject();
+            else if (command.equals("ERR"))
+                System.out.println("ERROR! Server return ERR.");
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -61,36 +80,4 @@ public class Client{
         return null;
     }
 
-    public static List getList(Properties data)
-    {
-        ObjectInputStream in = null;
-        ObjectOutputStream out = null;
-        try
-        {
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
-            out.writeObject(data);
-            out.flush();
-            return (List) in.readObject();
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public static void sendAction(Properties data)
-    {
-        ObjectOutputStream out = null;
-        try {
-            out = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            out.writeObject(data);
-            out.flush();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 }

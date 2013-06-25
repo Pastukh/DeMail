@@ -12,7 +12,16 @@ public class FolderDTO extends BaseDTO {
     private Boolean systemFolder;
     private int mailBoxId;
 
+    public FolderDTO() {
+    }
+
+    public FolderDTO(String name, Boolean systemFolder) {
+        this.name = name;
+        this.systemFolder = systemFolder;
+    }
+
     public String getName() {
+
         return name;
     }
 
@@ -58,5 +67,16 @@ public class FolderDTO extends BaseDTO {
 
     public void setSystem(Boolean system) {
         this.systemFolder = system;
+    }
+
+    @Override
+    public String toString() {
+        return "FolderDTO{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", systemFolder=" + systemFolder +
+                ", mailBoxId=" + mailBoxId +
+                '}';
     }
 }

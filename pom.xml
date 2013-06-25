@@ -26,7 +26,7 @@
             <!--<configuration>-->
                 <!--<archive>-->
                     <!--<manifest>-->
-                        <!--<mainClass>edu.tsystems.demail.App</mainClass>-->
+                        <!--<mainClass>edu.tsystems.demail.AppServer</mainClass>-->
                         <!--<addClasspath>true</addClasspath>-->
                         <!--<classpathPrefix>../llib/</classpathPrefix>-->
                         <!--<classpathLayoutType>repository</classpathLayoutType>-->

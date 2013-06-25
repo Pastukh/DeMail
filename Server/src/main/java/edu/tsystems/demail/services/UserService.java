@@ -6,6 +6,8 @@ import edu.tsystems.demail.DAO.UserDAO;
 import edu.tsystems.demail.DTO.UserDTO;
 import edu.tsystems.demail.model.UserEntity;
 
+import java.util.List;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +35,12 @@ public class UserService {
 
         if(userEntity == null) return null;
         return createUserDTOFromEntity(userEntity);
+    }
+
+    public UserDTO getUserByLogin(String login) {
+        List<UserEntity> list= userDAO.getUserByLogin(login);
+        if(list == null) return null;
+        return createUserDTOFromEntity(list.get(0));
     }
 
     /**

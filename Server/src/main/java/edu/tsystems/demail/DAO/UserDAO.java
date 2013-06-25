@@ -2,10 +2,7 @@ package edu.tsystems.demail.DAO;
 
 import edu.tsystems.demail.model.UserEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,8 +12,9 @@ import java.util.List;
  */
 public class UserDAO {
 //    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
-    private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
+    private static final EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
     public UserDAO() {
+
 
     }
 
@@ -43,7 +41,7 @@ public class UserDAO {
         TypedQuery<UserEntity> query = em.createNamedQuery("UserEntity.findByLogin", UserEntity.class)
                 .setParameter("login", login);
         if(query.getResultList().size() != 1) {
-            System.out.print("not found");
+            System.out.print(login + " not found");
             return null;
         }
         return query.getResultList();

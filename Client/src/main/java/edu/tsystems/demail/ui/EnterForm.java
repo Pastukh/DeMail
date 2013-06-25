@@ -1,5 +1,7 @@
 package edu.tsystems.demail.ui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import edu.tsystems.demail.Client;
 import edu.tsystems.demail.DTO.*;
 
@@ -19,7 +21,6 @@ public class EnterForm {
     private JButton button1;
     private JPanel panel1;
     private JTextField textField1;
-    //    private JTextField textField2;
     private JLabel ConnectionStatus;
     private JButton registerButton;
     private JButton closeButton;
@@ -41,7 +42,9 @@ public class EnterForm {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                isLogin = (loginUser() != null);
+                isLogin = (loginUser());
+                if (isLogin)
+                new MainForm().start(userDTO);
             }
         });
         registerButton.addActionListener(new ActionListener() {
@@ -53,30 +56,33 @@ public class EnterForm {
         });
     }
 
-    public UserDTO loginUser() {
-        UserDTO user = null;
+    public boolean loginUser() {
+//        UserDTO user = null;
+        boolean ret = false;
         try {
-            user = new UserDTO();
-            LoginDTO login = new LoginDTO();
-            login.setLogin(textField1.getText());
-            login.setPassword(Arrays.toString(passwordField1.getPassword()));
-            Client.sendTask("LOGIN", login);
-            user = (UserDTO) Client.getAnswer();
-            if (user != null) {
-                ConnectionStatus.setText("Welcome, " + user.getFirstname() + "!");
+            userDTO = new UserDTO();
+            LoginDTO loginDTO = new LoginDTO();
+            loginDTO.setLogin(textField1.getText());
+            loginDTO.setPassword(Arrays.toString(passwordField1.getPassword()));
+            Client.sendTask("LOGIN", loginDTO);
+            userDTO = (UserDTO) Client.getAnswer();
+            if (userDTO != null) {
+                ConnectionStatus.setText("Welcome, " + userDTO.getFirstname() + "!");
+                ret = true;
             } else ConnectionStatus.setText("Check entered data, please.");
         } catch (IOException e) {
             ConnectionStatus.setText("Connection error!");
             e.printStackTrace();
+        } catch (NullPointerException eq) {
+            ConnectionStatus.setText("Have not answer from server!");
+           // eq.printStackTrace();
         }
-        return user;
+
+        return ret;
     }
 
     public void start() {
         createUIComponents();
-
-
-//        userService = new UserService();
 
     }
 
@@ -104,7 +110,7 @@ public class EnterForm {
      */
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), 0, 0));
+        panel1.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), 0, 0));
         panel1.setName("panel1");
         panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
         textField1 = new JTextField();
@@ -112,27 +118,27 @@ public class EnterForm {
         textField1.setHorizontalAlignment(10);
         textField1.setName("textFiled1");
         textField1.setText("user");
-        panel1.add(textField1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panel1.add(textField1, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         ConnectionStatus = new JLabel();
         ConnectionStatus.setName("ConStatus");
         ConnectionStatus.setText("Fill the fields");
-        panel1.add(ConnectionStatus, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(ConnectionStatus, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button1 = new JButton();
         button1.setLabel("Login");
         button1.setName("button1");
         button1.setText("Login");
-        panel1.add(button1, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(button1, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         closeButton = new JButton();
         closeButton.setName("button3");
         closeButton.setText("Close");
-        panel1.add(closeButton, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(closeButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         registerButton = new JButton();
         registerButton.setName("button2");
         registerButton.setText("Register");
-        panel1.add(registerButton, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(registerButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         passwordField1 = new JPasswordField();
         passwordField1.setText("123");
-        panel1.add(passwordField1, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panel1.add(passwordField1, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 
     /**

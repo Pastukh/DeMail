@@ -27,6 +27,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>edu.tsystems</groupId>
+            <artifactId>Client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.25</version>
@@ -49,7 +54,22 @@
     </dependencies>
 
     <build>
-        <!--<plugins>-->
+        <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+            <archive>
+            <manifest>
+            <mainClass>edu.tsystems.demail.Server</mainClass>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>../../llib/</classpathPrefix>
+            <!--<classpathLayoutType>repository</classpathLayoutType>-->
+            </manifest>
+            </archive>
+            </configuration>
+        </plugin>
             <!--<plugin>-->
                 <!--<groupId>org.codehaus.mojo</groupId>-->
                 <!--<artifactId>nbm-maven-plugin</artifactId>-->
@@ -90,6 +110,6 @@
                     <!--<useDefaultManifestFile>true</useDefaultManifestFile>-->
                 <!--</configuration>-->
             <!--</plugin>-->
-        <!--</plugins>-->
+        </plugins>
     </build>
 </project>

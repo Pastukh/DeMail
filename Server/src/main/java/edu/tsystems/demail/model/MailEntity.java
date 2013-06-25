@@ -1,5 +1,8 @@
 package edu.tsystems.demail.model;
 
+import edu.tsystems.demail.model.BaseEntity;
+import edu.tsystems.demail.model.FolderEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,8 +11,19 @@ import java.util.Date;
  * Date: 13.06.13
  * Time: 23:40
  */
+
 @Entity
 @Table(name = "mails")
+@NamedQueries({
+        @NamedQuery(name = "MailEntity.getNewMailByMailBox" ,
+                query = "SELECT e FROM MailEntity e WHERE e.read = false AND e.mailBoxOwnerId = :fromId"),
+        @NamedQuery(name = "MailEntity.getAllMailByMailBox" ,
+                query = "SELECT e FROM MailEntity e WHERE e.mailBoxOwnerId = :fromId"),
+        @NamedQuery(name = "MailEntity.getMailByFolderId",
+                query = "SELECT e FROM MailEntity e WHERE e.folderId = :folderId"),
+        @NamedQuery(name = "MailEntity.getMailById",
+                query = "SELECT e FROM MailEntity e WHERE e.id = :id"),
+})
 public class MailEntity extends BaseEntity {
     @Column(name = "mail_from", length = 30)
     private String mailFrom;
@@ -19,7 +33,7 @@ public class MailEntity extends BaseEntity {
     private String subject;
     @Column(name = "body",  length = 255)
     private String body;
-    @Column(name = "date")
+    @Column(name = "date", columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     private Date date;
     @Column(name = "is_read")
     private Boolean read;
@@ -28,6 +42,10 @@ public class MailEntity extends BaseEntity {
     @OneToOne
     @PrimaryKeyJoinColumn
     private FolderEntity folder;
+    @Column(name = "folder_id")
+    private int folderId;
+
+
 
     public String getMailFrom() {
         return mailFrom;
@@ -91,6 +109,14 @@ public class MailEntity extends BaseEntity {
 
     public void setFolder(FolderEntity folder) {
         this.folder = folder;
+    }
+
+    public int getFolderId() {
+        return folderId;
+    }
+
+    public void setFolderId(int folderId) {
+        this.folderId = folderId;
     }
 
     @Override

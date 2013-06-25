@@ -1,5 +1,6 @@
 package edu.tsystems.demail.DAO;
 
+import edu.tsystems.demail.model.BaseEntity;
 import edu.tsystems.demail.model.FolderEntity;
 import edu.tsystems.demail.model.MailBoxEntity;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Time: 11:12
  */
 public class FolderDAO {
-    private EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
+    private static final EntityManager em = Persistence.createEntityManagerFactory("test").createEntityManager();
 
     public List<FolderEntity> getFoldersByUserId(int userId) {
         TypedQuery<FolderEntity> foldersQuery = em.createNamedQuery("FolderEntity.getFoldersByUserId", FolderEntity.class)
@@ -57,15 +58,22 @@ public class FolderDAO {
         TypedQuery<FolderEntity> queryFolder = em.createNamedQuery("FolderEntity.getFolderByNameAndUserId", FolderEntity.class)
                 .setParameter("name", name)
                 .setParameter("userId", userId);
-
         List<FolderEntity> folderEntities = queryFolder.getResultList();
-        if(folderEntities.size() != 1) return -1;
-
+        if(folderEntities.size() != 1) return 1;
         return folderEntities.get(0).getId();
+    }
+
+    public FolderEntity get(int id) {
+        return em.find(FolderEntity.class, id);
     }
     public void create (FolderEntity folderEntity){
         em.getTransaction().begin();
         em.merge(folderEntity);
+        em.getTransaction().commit();
+    }
+    public void delete(BaseEntity entity) {
+        em.getTransaction().begin();
+        em.remove(entity);
         em.getTransaction().commit();
     }
 }

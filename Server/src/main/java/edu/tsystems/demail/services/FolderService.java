@@ -1,6 +1,7 @@
 package edu.tsystems.demail.services;
 
 import edu.tsystems.demail.DAO.FolderDAO;
+import edu.tsystems.demail.DAO.MailBoxDAO;
 import edu.tsystems.demail.DAO.UserDAO;
 import edu.tsystems.demail.DTO.FolderDTO;
 import edu.tsystems.demail.DTO.MailBoxDTO;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class FolderService {
     private FolderDAO folderDAO = new FolderDAO();
-    private UserDAO userDAO;
+    private UserDAO userDAO = new UserDAO();
     //private MailService mailService;
 
     public List<FolderDTO> getFoldersByUserId(int userId) {
@@ -31,6 +32,8 @@ public class FolderService {
             folderDTO.setId(folder.getId());
             folderDTO.setName(folder.getName());
             folderDTO.setSystem(folder.isSystem());
+            folderDTO.setUserId(userId);
+            folderDTO.setMailBoxId(folder.getMailBox().getId());
 
             folders.add(folderDTO);
         }
@@ -52,21 +55,23 @@ public class FolderService {
 
 
     public void createFolder(FolderDTO folderDTO) {
-//        FolderEntity folderEntity = new FolderEntity();
-
+        FolderEntity folderEntity = new FolderEntity();
+        System.out.println("-----------create folder");
+        System.out.println(folderDTO);
 //        MailBoxEntity mailBoxEntity = ((UserEntity)userDAO.get(UserEntity.class, folderDTO.getUserId())).getMailBox();
-//        folderEntity.setMailBox(mailBoxEntity);
-//        folderEntity.setName(folderDTO.getName());
-//        folderEntity.setSystem(folderDTO.isSystem());
+        MailBoxEntity mailBoxEntity = new MailBoxDAO().get(folderDTO.getMailBoxId());
+        folderEntity.setMailBox(mailBoxEntity);
+        folderEntity.setName(folderDTO.getName());
+        folderEntity.setSystem(folderDTO.isSystem());
 
-//        folderDAO.create(folderEntity);
+        folderDAO.create(folderEntity);
+        System.out.println("-----------folder created");
     }
     public void removeFolder(int folderId) {
-//        FolderEntity folderEntity = (FolderEntity) folderDAO.get(FolderEntity.class, folderId);
-//        if(!folderEntity.isSystem()) {
-//            mailService.removeEmailFromFolder(folderId);
-//            folderDAO.delete(folderEntity);
-//        }
+        FolderEntity folderEntity = (FolderEntity) folderDAO.get(folderId);
+        if(!folderEntity.isSystem()) {
+            folderDAO.delete(folderEntity);
+        }   else System.out.println("Folder " + folderEntity.getName() + " is system!");
     }
 
 
